@@ -11,10 +11,56 @@ AtCoderの問題を解くための個人プロジェクトです。週1回のABC
 ## ディレクトリ構成
 
 - `contests/` — コンテストごとにフォルダを分けてABC問題を管理する
-- `tests/` — サンプル・テスト用コード
+  - `contests/<contest_name>/<problem_letter>_test/` — サンプルケース置き場（`dt` でダウンロードされる）
+- `tools/create_new_contest.py` — 新規コンテストのひな形を作成するスクリプト
+- `tools/download_test.py` / `tools/run_test.py` — サンプルケースのダウンロード・実行用スクリプト
+- `dt` / `rt` — 上記2スクリプトの短縮実行ラッパー
 - `template.py` — 新規解答用のテンプレート
+- `tests/` — プロジェクト初期化時のサンプルで、コンテスト解答のテストとは無関係
 - `pyproject.toml` / `uv.lock` — [uv](https://docs.astral.sh/uv/) による依存関係管理
 - `LICENSE.txt` — ライセンス
+
+## 使い方
+
+1コンテストを解く一連の流れを、`abc426` を例に説明します。
+
+### 1. 新規コンテストのひな形作成
+
+```
+uv run tools/create_new_contest.py abc426
+```
+
+`template.py` を `contests/abc426/a.py` 〜 `g.py` としてコピーします。特定の問題だけ作りたい場合は `problems` 引数で文字を指定します（例: `uv run tools/create_new_contest.py abc426 ab` でA, B問題のみ作成）。
+
+### 2. サンプルケースのダウンロード
+
+AtCoderの問題ページURLを指定して、A問題のサンプルをダウンロードします。
+
+```
+./dt abc426 a https://atcoder.jp/contests/abc426/tasks/abc426_a
+```
+
+サンプルは `contests/abc426/a_test/` に保存されます。
+
+### 3. 解答を書く
+
+`contests/abc426/a.py` を編集して解答を実装します。
+
+### 4. サンプルケースでテスト実行
+
+```
+./rt abc426 a
+```
+
+ダウンロード済みのサンプルケースに対して解答を実行し、期待出力と一致するか確認します。複数問題をまとめてテストしたい場合は `./rt abc426 ab` のように文字を並べて指定します。
+
+### 5. Lint
+
+```
+uv run ruff check .
+```
+
+提出前に構文・スタイルチェックを行います。
 
 ## ライセンス
 
