@@ -4,4 +4,14 @@ version = "0.1.0"
 description = "AtcoderのABC問題ディレクトリ"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "online-judge-tools>=11.5.1",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.16.1",
+]
+
+[tool.ruff]
+line-length = 120
