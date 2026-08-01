@@ -21,4 +21,6 @@ DS.Store
 # claude
 .claude/
 
-
+# abc test cases
+*.in
+*.out
