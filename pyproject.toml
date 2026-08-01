@@ -1,0 +1,7 @@
+[project]
+name = "atcoder-programming"
+version = "0.1.0"
+description = "AtcoderのABC問題ディレクトリ"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
