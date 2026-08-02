@@ -9,6 +9,7 @@ AtCoder（ABC/AHC）の解答を管理する個人リポジトリ。Python 3.12+
 - `template.py` — 新規解答用テンプレート（ルート直下）
 - `tools/create_new_contest.py` — 新規コンテストのひな形を作成するスクリプト
 - `tools/download_test.py` / `tools/run_test.py` — サンプルケースのダウンロード・実行用スクリプト
+- `tools/contest_utils.py` — `contest_name` の数字省略形（例: `426` → `abc426`）を解決する共有ヘルパー。`create_new_contest.py` / `download_test.py` から参照される
 - `dt` / `rt` — 上記2スクリプトの短縮実行ラッパー（ルート直下、実行可能ファイル）
 - `cc` — `tools/create_new_contest.py` の短縮実行ラッパー（ルート直下、実行可能ファイル）
 - `contests/<contest_name>/<problem_letter>_test/` — 各問題のサンプルケース置き場。例: `contests/abc426/c_test/sample-1.in`
@@ -46,9 +47,11 @@ uv run ruff check .
 `online-judge-tools`（`oj`）をラップした `tools/download_test.py` / `tools/run_test.py` を使う。サンプルは `contests/<contest_name>/<problem_letter>_test/` に問題ごとに配置される（衝突を避けるため、`oj download` のデフォルト保存先である直下の `test/` は使わない）。
 
 ```
-./dt <contest_name> <problem_letter> <問題URL>
+./dt <contest_name> <problem_letter> [問題URL]
 ./rt <contest_name> <problems>
 ```
 
 - `dt` は `uv run python tools/download_test.py`、`rt` は `uv run python tools/run_test.py` を呼ぶだけの短縮ラッパー（`chmod +x` 済み、リポジトリ外のディレクトリからでも動作する）。フルコマンドで直接叩いても同じ
+- `contest_name` は `create_new_contest.py` と同様、数字のみ（例: `426`）を渡すと `abc426` として扱われる
+- 問題URLは省略可能。省略時は `https://atcoder.jp/contests/<contest_name>/tasks/<contest_name>_<problem_letter>` の形式で自動生成される（ABC以外の形式など、自動生成に合わないURLを使いたい場合のみ明示的に指定する）
 - `problems` は `create_new_contest.py` と同様、複数文字を並べて一括実行可能（例: `ab` でa, b問題を順にテスト）

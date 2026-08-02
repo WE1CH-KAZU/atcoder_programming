@@ -2,6 +2,8 @@ import shutil
 import sys
 from pathlib import Path
 
+from contest_utils import resolve_contest_name
+
 # ルートディレクトリ
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -18,9 +20,7 @@ def main():
         print(f"  problems: 作成する問題の文字を並べたもの (省略時: {DEFAULT_PROBLEMS})")
         sys.exit(1)
 
-    contest_name = sys.argv[1]
-    if contest_name.isdigit():
-        contest_name = f"abc{int(contest_name):03d}"
+    contest_name = resolve_contest_name(sys.argv[1])
     problems = sys.argv[2] if len(sys.argv) == 3 else DEFAULT_PROBLEMS
 
     if not contest_name or "/" in contest_name or contest_name in (".", ".."):

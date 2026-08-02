@@ -16,6 +16,7 @@ AtCoderの問題を解くための個人プロジェクトです。週1回のABC
 - `tools/download_test.py` / `tools/run_test.py` — サンプルケースのダウンロード・実行用スクリプト
 - `dt` / `rt` — 上記2スクリプトの短縮実行ラッパー
 - `cc` — `tools/create_new_contest.py` の短縮実行ラッパー
+- `tools/contest_utils.py` — `contest_name` の数字省略形（例: `426` → `abc426`）を解決する共有ヘルパー
 - `template.py` — 新規解答用のテンプレート
 - `tests/` — プロジェクト初期化時のサンプルで、コンテスト解答のテストとは無関係
 - `pyproject.toml` / `uv.lock` — [uv](https://docs.astral.sh/uv/) による依存関係管理
@@ -35,13 +36,13 @@ AtCoderの問題を解くための個人プロジェクトです。週1回のABC
 
 ### 2. サンプルケースのダウンロード
 
-AtCoderの問題ページURLを指定して、A問題のサンプルをダウンロードします。
+A問題のサンプルをダウンロードします。ABC問題のURLは `contest_name`/`problem_letter` から機械的に決まるため、URLは省略できます。
 
 ```
-./dt abc426 a https://atcoder.jp/contests/abc426/tasks/abc426_a
+./dt 426 a
 ```
 
-サンプルは `contests/abc426/a_test/` に保存されます。
+省略時は `https://atcoder.jp/contests/abc426/tasks/abc426_a` が自動生成されます。サンプルは `contests/abc426/a_test/` に保存されます。ABC以外の形式などURLを明示したい場合は3番目の引数として渡します（例: `./dt abc426 a https://atcoder.jp/contests/abc426/tasks/abc426_a`）。
 
 ### 3. 解答を書く
 

@@ -2,6 +2,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from contest_utils import resolve_contest_name
+
 # ルートディレクトリ
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -9,14 +11,16 @@ CONTESTS = ROOT / "contests"
 
 
 def main():
-    if len(sys.argv) != 4:
-        print("Usage: uv run tools/download_test.py <contest> <problem> <url>")
-        print("  contest: e.g. abc426")
+    if len(sys.argv) not in (3, 4):
+        print("Usage: uv run tools/download_test.py <contest> <problem> [url]")
+        print("  contest: e.g. abc426 (数字のみの場合は abc<3桁> として扱う。例: 426 -> abc426)")
         print("  problem: e.g. a")
-        print("  url: 問題ページのURL")
+        print("  url: 問題ページのURL (省略時は abc426_a のようなURLを自動生成する)")
         sys.exit(1)
 
-    contest_name, problem, url = sys.argv[1], sys.argv[2], sys.argv[3]
+    contest_name = resolve_contest_name(sys.argv[1])
+    problem = sys.argv[2]
+    url = sys.argv[3] if len(sys.argv) == 4 else f"https://atcoder.jp/contests/{contest_name}/tasks/{contest_name}_{problem}"
 
     if not contest_name or "/" in contest_name or contest_name in (".", ".."):
         print(f"Invalid contest name: {contest_name}")
