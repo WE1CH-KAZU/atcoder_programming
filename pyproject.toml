@@ -13,6 +13,9 @@ dependencies = [
 dev = [
     "ruff>=0.16.1",
 ]
+notebook = [
+    "ipykernel>=7.3.0",
+]
 
 [tool.ruff]
 line-length = 120

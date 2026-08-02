@@ -24,3 +24,6 @@ DS.Store
 # abc test cases
 *.in
 *.out
+
+# tests
+tests/*
