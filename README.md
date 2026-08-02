@@ -15,6 +15,7 @@ AtCoderの問題を解くための個人プロジェクトです。週1回のABC
 - `tools/create_new_contest.py` — 新規コンテストのひな形を作成するスクリプト
 - `tools/download_test.py` / `tools/run_test.py` — サンプルケースのダウンロード・実行用スクリプト
 - `dt` / `rt` — 上記2スクリプトの短縮実行ラッパー
+- `cc` — `tools/create_new_contest.py` の短縮実行ラッパー
 - `template.py` — 新規解答用のテンプレート
 - `tests/` — プロジェクト初期化時のサンプルで、コンテスト解答のテストとは無関係
 - `pyproject.toml` / `uv.lock` — [uv](https://docs.astral.sh/uv/) による依存関係管理
@@ -27,10 +28,10 @@ AtCoderの問題を解くための個人プロジェクトです。週1回のABC
 ### 1. 新規コンテストのひな形作成
 
 ```
-uv run tools/create_new_contest.py abc426
+./cc 426
 ```
 
-`template.py` を `contests/abc426/a.py` 〜 `g.py` としてコピーします。特定の問題だけ作りたい場合は `problems` 引数で文字を指定します（例: `uv run tools/create_new_contest.py abc426 ab` でA, B問題のみ作成）。
+`template.py` を `contests/abc426/a.py` 〜 `g.py` としてコピーします。`contest_name` には `abc426` のようなフルネームの他、数字のみ（`426`）も指定でき、その場合は `abc<3桁ゼロ埋め>`（`abc426`）として扱われます。特定の問題だけ作りたい場合は `problems` 引数で文字を指定します（例: `./cc 426 ab` でA, B問題のみ作成）。`cc` は `uv run python tools/create_new_contest.py` を呼ぶだけの短縮ラッパーで、フルコマンドで直接叩いても同じです。
 
 ### 2. サンプルケースのダウンロード
 

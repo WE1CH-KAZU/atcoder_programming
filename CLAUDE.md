@@ -10,6 +10,7 @@ AtCoder（ABC/AHC）の解答を管理する個人リポジトリ。Python 3.12+
 - `tools/create_new_contest.py` — 新規コンテストのひな形を作成するスクリプト
 - `tools/download_test.py` / `tools/run_test.py` — サンプルケースのダウンロード・実行用スクリプト
 - `dt` / `rt` — 上記2スクリプトの短縮実行ラッパー（ルート直下、実行可能ファイル）
+- `cc` — `tools/create_new_contest.py` の短縮実行ラッパー（ルート直下、実行可能ファイル）
 - `contests/<contest_name>/<problem_letter>_test/` — 各問題のサンプルケース置き場。例: `contests/abc426/c_test/sample-1.in`
 - `snippets/` — アルゴリズムスニペット置き場（現状空、将来用）
 - `tests/` — プロジェクト初期化時のサンプルで、コンテスト解答のテストとは無関係
@@ -17,10 +18,11 @@ AtCoder（ABC/AHC）の解答を管理する個人リポジトリ。Python 3.12+
 ## 新規コンテストの作成
 
 ```
-uv run tools/create_new_contest.py <contest_name> [problems]
+./cc <contest_name> [problems]
 ```
 
-- `contest_name`: 例 `abc426`（小文字 + 番号）
+- `cc` は `uv run python tools/create_new_contest.py` を呼ぶだけの短縮ラッパー（`dt`/`rt` と同様、`chmod +x` 済み、リポジトリ外のディレクトリからでも動作する）。フルコマンド（`uv run tools/create_new_contest.py <contest_name> [problems]`）で直接叩いても同じ
+- `contest_name`: 例 `abc426`（小文字 + 番号）。数字のみ（例: `463`）を渡すと `abc<3桁ゼロ埋め>`（`abc463`）として扱われる
 - `problems`: 作成する問題文字を並べたもの。省略時は `abcdefg`（a〜gの7問分を作成）
 - `template.py` を `contests/<contest_name>/<letter>.py` としてコピーするだけの処理。既に同名のコンテストフォルダがあると失敗する
 

@@ -14,11 +14,13 @@ DEFAULT_PROBLEMS = "abcdefg"
 def main():
     if len(sys.argv) not in (2, 3):
         print("Usage: uv run tools/create_new_contest.py <contest_name> [problems]")
-        print("  contest_name: e.g. abc426")
+        print("  contest_name: e.g. abc426 (数字のみの場合は abc<3桁> として扱う。例: 463 -> abc463)")
         print(f"  problems: 作成する問題の文字を並べたもの (省略時: {DEFAULT_PROBLEMS})")
         sys.exit(1)
 
     contest_name = sys.argv[1]
+    if contest_name.isdigit():
+        contest_name = f"abc{int(contest_name):03d}"
     problems = sys.argv[2] if len(sys.argv) == 3 else DEFAULT_PROBLEMS
 
     if not contest_name or "/" in contest_name or contest_name in (".", ".."):
