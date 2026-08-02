@@ -2,6 +2,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from contest_utils import resolve_contest_name
+
 # ルートディレクトリ
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -11,11 +13,12 @@ CONTESTS = ROOT / "contests"
 def main():
     if len(sys.argv) != 3:
         print("Usage: uv run tools/run_test.py <contest> <problems>")
-        print("  contest: e.g. abc426")
+        print("  contest: e.g. abc426 (数字のみの場合は abc<3桁> として扱う。例: 426 -> abc426)")
         print("  problems: テストする問題の文字を並べたもの (e.g. ab)")
         sys.exit(1)
 
-    contest_name, problems = sys.argv[1], sys.argv[2]
+    contest_name = resolve_contest_name(sys.argv[1])
+    problems = sys.argv[2]
 
     if not contest_name or "/" in contest_name or contest_name in (".", ".."):
         print(f"Invalid contest name: {contest_name}")
