@@ -22,11 +22,39 @@ AtCoderの問題を解くための個人プロジェクトです。週1回のABC
 - `pyproject.toml` / `uv.lock` — [uv](https://docs.astral.sh/uv/) による依存関係管理
 - `LICENSE.txt` — ライセンス
 
+## 前準備
+**acloginのインストール**
+
+ログインを通しておく
+```
+uv tool install aclogin
+```
+インストール確認を --help で実施
+```
+aclogin --help
+```
+**ブラウザでログイン**
+ブラウザでログインし参加登録を済ませる。
+
+**REVEAL_SESSION情報をコピーする**
+1. ブラウザでF12を押して`Application`列を選択
+2. Cookies >> Atcoder のURL >> Name `REVEL_SESSION` からパスキーをコピー
+3. bash `aclogin` を入力
+4. パスキーをペースト
+5. bash `oj login --check https://atcoder.jp/` で通っているかチェック
+    - 通っていれば `[NETWORK] 200 OK` が出る
+6. コンテスト前に `oj login --check` で確認する
+
 ## 使い方
 
 1コンテストを解く一連の流れを、`abc426` を例に説明します。
 
 ### 1. 新規コンテストのひな形作成
+
+```
+# 1度だけ実施
+chmod +x cc
+```
 
 ```
 ./cc 426
@@ -37,6 +65,11 @@ AtCoderの問題を解くための個人プロジェクトです。週1回のABC
 ### 2. サンプルケースのダウンロード
 
 A問題のサンプルをダウンロードします。ABC問題のURLは `contest_name`/`problem_letter` から機械的に決まるため、URLは省略できます。
+
+```
+# 1度だけ実施
+chmod +x dt
+```
 
 ```
 ./dt 426 a
@@ -50,6 +83,10 @@ A問題のサンプルをダウンロードします。ABC問題のURLは `conte
 
 ### 4. サンプルケースでテスト実行
 
+```
+# 1度だけ実施
+chmod +x rt
+```
 ```
 ./rt 426 a
 ```
