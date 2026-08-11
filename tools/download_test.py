@@ -43,6 +43,11 @@ def main():
     test_dir.mkdir(parents=True)
 
     result = subprocess.run(["oj", "download", url, "-d", str(test_dir)], check=False)
+
+    if result.returncode != 0 and not any(test_dir.iterdir()):
+        # 失敗したら空ディレクトリを消す
+        test_dir.rmdir()
+
     sys.exit(result.returncode)
 
 
