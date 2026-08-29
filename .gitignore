@@ -10,7 +10,7 @@ wheels/
 .venv
 
 # mac
-DS.Store
+.DS_Store
 
 # vs code
 .vscode/
