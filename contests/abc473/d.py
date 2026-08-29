@@ -1,0 +1,58 @@
+import sys
+from bisect import bisect_left, bisect_right
+from collections import Counter, defaultdict, deque
+from heapq import heappop, heappush
+from itertools import (
+    combinations,
+    permutations,  # 順列組み合わせ
+)
+
+input = sys.stdin.readline
+
+INF = 10**18
+MOD = 998244353
+
+sys.setrecursionlimit(10**6)
+
+N, K = map(int, input().split())
+
+ans = []
+tochuu = []
+
+def dfs(i, nokori):
+    if i > N:                      # N個すべて決め終わった
+        if nokori == 0:            # ちょうど使い切っていれば成功
+            ans.append(" ".join(map(str, tochuu)))
+        return
+    for v in range(nokori // i + 1):   # i番目に入れる値を0から昇順に試す
+        tochuu.append(v)
+        dfs(i + 1, nokori - i * v)
+        tochuu.pop()                   # 戻す
+
+dfs(1, K)
+print("\n".join(ans))
+
+# def dfs(状態を表す引数):
+#     if 終了条件:
+#         # 成否の判定・答えの保存など
+#         return
+#     for 選択肢 in 候補:
+#         # 選ぶ
+#         dfs(次の状態)
+#         # 戻す
+
+# 実際の動き
+
+# まず 1番目の箱に 0 を入れる。使った分は 0 なので、残り 8。
+
+# 次に 2番目の箱に 0 を入れる。2番目は2倍されるので使った分は 0。残り 8。
+
+# 次に 3番目の箱。3倍されるので、入れられるのは 0、1、2 まで（3 を入れると 9 になって超える）。順に試すと、残りは 8、5、2。どれも 0 になりません。失敗。
+
+# ここで 2番目の箱に戻って、今度は 1 を入れます。2倍されて 2 を使い、残り 6。
+
+# 3番目の箱を試すと、2 を入れたときに 3×2 = 6 でぴったり残り 0。成功です。これが 0 1 2。
+
+# さらに 2番目を 2、3、4 と増やして試していきます。4 を入れると 2×4 = 8 で残り 0。3番目は 0 しか入れられず、それで残り 0 なので 成功。これが 0 4 0。
+
+# 2番目の箱でもう試すものがなくなったので、1番目の箱に戻って 1 を入れます。あとは同じことの繰り返しです。
