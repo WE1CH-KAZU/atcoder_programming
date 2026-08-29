@@ -8,6 +8,8 @@ from itertools import (
 )
 
 input = sys.stdin.readline
+# 再起上限
+sys.setrecursionlimit(10**6)
 
 INF = 10**18
 MOD = 998244353
